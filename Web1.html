@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <meta charset="UTF-8">
+    <title>Web</title>
+    <style>
+        h1 {
+        text-align: center;
+        color: red;
+        }
+    </style>
+
+    <style>
+        .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%
+        }
+    </style>
+    <script>
+function includeHTML() {
+  var z, i, elmnt, file, xhttp;
+  /* Loop through a collection of all HTML elements: */
+  z = document.getElementsByTagName("*");
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i];
+    /*search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute("w3-include-html");
+    if (file) {
+      /* Make an HTTP request using the attribute value as the file name: */
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+          /* Remove the attribute, and call this function once more: */
+          elmnt.removeAttribute("w3-include-html");
+          includeHTML();
+        }
+      }
+      xhttp.open("GET", file, true);
+      xhttp.send();
+      /* Exit the function: */
+      return;
+    }
+  }
+}
+</script>
+</head>
+<body>
+<a href="Web.html"></a><br>
+<h1><strong>Stránky jsou v údržbě</strong></h1>
+<br>
+<h2></h2>
+<center>Stránky jsou v údržbě. Jelikož škola chce mít samozřejmě lepší stránky, tak se rozhodla, že zlepší svoje webovky. </center>
+<center><a href="Web.html">Zpět...</a><br></center>
+<div w3-include-html="Web.html"></div>
+</body>
+</html>
